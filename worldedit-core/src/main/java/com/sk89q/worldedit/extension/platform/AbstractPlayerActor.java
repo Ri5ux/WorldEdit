@@ -147,12 +147,12 @@ public abstract class AbstractPlayerActor implements Actor, Player, Cloneable {
 
     @Override
     public void findFreePosition() {
-        findFreePosition(getBlockIn());
+        findFreePosition(getBlockLocation());
     }
 
     @Override
     public boolean ascendLevel() {
-        final Location pos = getBlockIn();
+        final Location pos = getBlockLocation();
         final int x = pos.getBlockX();
         int y = Math.max(0, pos.getBlockY());
         final int z = pos.getBlockZ();
@@ -193,7 +193,7 @@ public abstract class AbstractPlayerActor implements Actor, Player, Cloneable {
 
     @Override
     public boolean descendLevel() {
-        final Location pos = getBlockIn();
+        final Location pos = getBlockLocation();
         final int x = pos.getBlockX();
         int y = Math.max(0, pos.getBlockY() - 1);
         final int z = pos.getBlockZ();
@@ -243,7 +243,7 @@ public abstract class AbstractPlayerActor implements Actor, Player, Cloneable {
 
     @Override
     public boolean ascendToCeiling(int clearance, boolean alwaysGlass) {
-        Location pos = getBlockIn();
+        Location pos = getBlockLocation();
         int x = pos.getBlockX();
         int initialY = Math.max(0, pos.getBlockY());
         int y = Math.max(0, pos.getBlockY() + 2);
@@ -276,7 +276,7 @@ public abstract class AbstractPlayerActor implements Actor, Player, Cloneable {
 
     @Override
     public boolean ascendUpwards(int distance, boolean alwaysGlass) {
-        final Location pos = getBlockIn();
+        final Location pos = getBlockLocation();
         final int x = pos.getBlockX();
         final int initialY = Math.max(0, pos.getBlockY());
         int y = Math.max(0, pos.getBlockY() + 1);
@@ -311,11 +311,6 @@ public abstract class AbstractPlayerActor implements Actor, Player, Cloneable {
             e.printStackTrace();
         }
         setPosition(Vector3.at(x + 0.5, y, z + 0.5));
-    }
-
-    @Override
-    public Location getBlockIn() {
-        return getLocation().setPosition(getLocation().toVector().floor());
     }
 
     @Override
